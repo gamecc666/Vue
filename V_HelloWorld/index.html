@@ -6,10 +6,81 @@
 	</head>
 	<body>
 		<!-- 事件监听 -->
-		<div id="example-6">
-			<button v-on:click="counter+=1">Add 1</button>
-			<p>The button above has been clicked {{counter}} times.</p>
+			<!-- 后面跟随JS代码 -->
+			<div id="example-6">
+				<button v-on:click="counter+=1">Add 1</button>
+				<p>The button above has been clicked {{counter}} times.</p>
+			</div>
+			<!-- 后面跟随方法名称 -->
+			<div id="example-7">
+				<button v-on:click="greet">Greet</button>
+			</div>
+			<!-- 在内联JS语句中调用方法 -->
+			<div id="example-8">
+				<button v-on:click="say('hi')">Say hi</button>
+				<button v-on:click="say('what')">Say what</button>
+			</div>
+			<!-- vue.js为v-on提供的事件修饰符,以.开始 -->
+				<!-- 阻止单击事件继续传播 -->
+				<a v-on:click.stop='doThis'></a>
+				<!-- 提交事件不重载界面 -->
+				<form v-on:submit.prevent='onSubmit'></form>
+				<!-- 修饰符可以串联 -->
+				<a v-on:click.stop.prevent="doThat"></a>
+				<!-- 只有修饰符 -->
+				<form v-on:submit.prevent></form>
+				<!-- 添加事件监听器时使用事件捕获模式
+				即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+				<div v-on:click.capture="doThis"></div>
+				<!-- 只有在event.target是当前元素自身时触发处理函数
+				即事件不是从内部元素触发的 -->
+				<div v-on:click.self='doThat'>...</div>
+				<!-- 点击事件只处理一次 -->
+				<a v-on:click.once="doThis"></a>
+				<!-- 滚动事件的默认行为（即滚动行为）将会立即触发
+				而不会等待‘onScoll’完成
+				这其中包含'event.preventDefault()'的情况 
+				.passive不能和.prevent一起使用，因为.prevent会被忽略
+				.passive会告诉浏览器你不想阻止事件的默认行为-->
+				<div v-on:scroll.passive='onScroll'>...</div>
+			<!-- Vue.js提供的按键修饰符；不止下面这些-->
+				<!-- 只有‘key’是‘Enter’时调用‘vm.submit()’ -->
+				<input v-on:keyup.enter="submit">
+				<!-- 只有点击PageDown时才被调用 -->
+				<input v-on:keyup.page-down="onPageDown">
+			<!-- 按键码 keyCode用法已被废弃并可能不会被新的浏览器支持；
+			 使用keyCode也是允许的；vue提供了绝大多数常用的按键码的别名
+			 .enter|.tab|.delete|.esc|.space|.up|.down|.left|.right-->			
+				<input v-on:keyup.13="summit">
+			 <!-- 自定义按键修饰符别名；下面可以再代码中使用v-on:keyup.f1-->
+				Vue.config.keyCodes.f1=112
+			 <!-- 系统修饰符 
+			 可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器
+			 .ctrl|.alt|.shift|.meta-->
+				<!-- Alt+C -->
+				<input v-on:keyup.alt.67="clear">
+				<!-- Ctrl+Click -->
+				<div v-on:click.ctrl="Do something">Do Something</div>
+			 <!-- .exact修饰符(简称精准系统修饰符) ，允许你控制由精确的系统修饰符组合触发的事件-->
+				<!-- 即使Alt或Shift被一同按下时也会触发 -->	
+				<button v-on:click.ctrl="onClick">A</button>
+				<!-- 有且只有Ctrl被按下时才会触发 -->
+				<button v-on:click.ctrl.exact="onCtrlClick">A</button>
+				<!-- 没有任何系统修饰符被按下的时候触发 -->
+				<button v-on:click.exact="onClick">A</button>
+			 
+			 <!-- 鼠标按钮修饰符 
+			 .left|.right|.middle-->
+				
+			
+			
+		<!-- 在内联JS语句中访问原始的DOM事件（使用特殊变量$event） -->
+		<div id="example-9">
+			<button v-on:click="warn('form cannot be submited yet',$event)">
+				Submit
+			</button>
 		</div>
+		
 		<!-- 列表渲染 -->
 		<!-- 使用数组 -->
 		<ul id="example-1">
@@ -88,6 +159,41 @@
 	<!--代替js函数库-->
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 	<script type="text/javascript">
+		var example9=new Vue({
+			el:'#example-9',
+			methods:{
+				warn:function(message,event){
+					if(event){
+						console.log(event);
+						event.preventDefault();
+					}
+					alert(message);
+				}
+			}
+		});
+		var example8=new Vue({
+			el:'#example-8',
+			methods:{
+				say:function(message){
+					alert(message);
+				}
+			}
+		});
+		var example7=new Vue({
+			el:'#example-7',
+			data:{
+				name:'Vue.js'
+			},
+			methods:{
+				greet:function(event){
+					alert('Hello'+this.name+'!');
+					if(event){
+						console.log(event);
+						alert(event.target.tagName)
+					}
+				}
+			}
+		});
 		var example6=new Vue({
 			el:'#example-6',
 			data:{
