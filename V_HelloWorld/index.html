@@ -5,6 +5,105 @@
 		<title></title>		
 	</head>
 	<body>
+		<!-- 表单输入绑定 -->
+			<div id="example-10">
+				<!-- 文本 -->
+				<input v-model="message" placeholder="edit me">
+				<p>Message is {{message}}</p>
+				<!-- 多行文本 
+					white-space:处理空白字符；pre-line:合并空白符序列保留换行符
+				-->
+				<span>Multiline message is:</span>
+				<p style="white-space:pre-line;">{{message}}</p>
+				<br>
+				<textarea v-model="message" placeholder="add multiple lines"></textarea>
+				<!-- 复选框 -->
+				<input type="checkbox"  id="checkbox" v-model="checked"/>
+				<label for="checkbox">{{checked}}</label>
+				
+				<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+				<label for="jack">Jack</label>
+				<input type="checkbox"  id="john" value="John" v-model="checkedNames"/>
+				<label for="john">John</label>
+				<input type="checkbox" id="mike" value="Mike" v-model="checkedNames"/>
+				<label for="mike">Mike</label>
+				<br>
+				<span>Checked names:{{checkedNames}}</span>
+				<!-- 单选按钮 -->
+				<br>
+				<input type="radio" id="one" value="One" v-model="picked"/>
+				<label for="one">One</label>
+				<br>
+				<input type="radio" id="two" value="Two" v-model="picked"/>
+				<label for="two">Two</label>
+				<br>
+				<span>Picked:{{picked}}</span>
+				<br>
+				<!-- 选择框 -->
+				<!-- 单选时 -->
+				<select v-model="selected">
+					<option disabled value="">请选择</option>
+					<option >A</option>
+					<option >B</option>
+					<option >C</option>
+				</select>
+				<span>Selected:{{selected}}</span>
+				<br>
+				<!-- 多选时 -->
+				<select v-model="selectedMore" multiple style="width:50px;">
+					<option>A</option>
+					<option>B</option>
+					<option>C</option>
+				</select>
+				<br>
+				<span>SelectedMore:{{selectedMore}}</span>
+				<br>
+				<!-- 用v-for渲染的动态选项 -->
+				<select v-model="selectedDynamicMore">
+					<option v-for="option in options" v-bind:value="option.value">
+						{{option.text}}
+					</option>
+				</select>
+				<span>Selected:{{selectedDynamicMore}}</span>
+				<br>
+				<!-- 值绑定 
+				对于单选按钮、复选框、选择框的选项，v-model绑定的值通常是静态字符串（对于
+				复选框也可以是布尔值）
+				-->
+					<!-- 当选中时，`picked` 为字符串 "a"
+					<input type="radio" v-model="picked" value="a"> -->
+					
+					<!-- `toggle` 为 true 或 false -->
+					<!-- <input type="checkbox" v-model="toggle"> -->
+					
+					<!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+					<!-- <select v-model="selected">
+					  <option value="abc">ABC</option>
+					</select>
+					<br> -->
+					<!-- 复选框 -->
+					<input type="checkbox" v-model="toggle" true-value='yes' false-value='no'>
+					<!-- 单选框 -->
+					<input type="radio" v-model="pick" v-bind:value="a">
+					<!-- 选择框选项 -->
+					<select v-model="selected">
+					    <!-- 内联对象字面量 -->
+					  <option v-bind:value="{ number: 123 }">123</option>
+					</select>
+					<br>
+					<!-- 修饰符 -->
+						<!-- .lazy 在默认情况下，v-model 在每次 input 事件触发后将输入框的值与数据进行同步 (除了上述输入法组合文字时)。
+						你可以添加 lazy 修饰符，从而转为在 change 事件_之后_进行同步：-->
+						<input v-model.lazy="msg">
+						<!-- .number 将用户的输入值转为数值类型 -->
+						<input type="number" v-model.number="age">
+						<!-- .trim 自动过滤掉用户输入的首位空白字符 -->
+						<input v-model.trim="msg" />
+			</div>
+			
+			
+			
+			
 		<!-- 事件监听 -->
 			<!-- 后面跟随JS代码 -->
 			<div id="example-6">
@@ -159,6 +258,27 @@
 	<!--代替js函数库-->
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 	<script type="text/javascript">
+		var example10=new Vue({
+			el:'#example-10',
+			data:{
+				checked:"true",
+				message:'',
+				checkedNames:[],
+				picked:'',
+				selected:'',
+				selectedMore:[],
+				selectedDynamicMore:'A',
+				options:[
+					{text:'One',value:'A'},
+					{text:'Two',value:'B'},
+					{text:'Three',value:'C'}
+				],
+				toggle:'',
+				msg:'this is  gamecc666!!!   '
+			}
+			
+		});
+		
 		var example9=new Vue({
 			el:'#example-9',
 			methods:{
