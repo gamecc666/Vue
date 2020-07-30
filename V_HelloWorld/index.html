@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>		
+	</head>
+	<body>
+		<!-- 事件监听 -->
+		<div id="example-6">
+			<button v-on:click="counter+=1">Add 1</button>
+			<p>The button above has been clicked {{counter}} times.</p>
+		</div>
+		<!-- 列表渲染 -->
+		<!-- 使用数组 -->
+		<ul id="example-1">
+			<li v-for="(item,index) in items" v-bind:key="item.message">
+				{{parentMessage}}--{{index}}--{{item.message}}
+			</li>			
+		</ul>
+		<ul id='example-3'>
+			<li  v-for="n in evenNumbers">{{n}}</li>
+		</ul>
+		<div id='example-4'>
+			<ul v-for="set in sets">
+				<li v-for="n in even(set)">{{n}}</li>
+			</ul>
+		</div>
+		<div id='example-5'>
+			<span v-for="n in 10">{{n}}</span>
+		</div>
+		
+		<!-- 使用对象 -->
+		<ul id="v-for-object" class="demo">
+			<li v-for="(value,valueName,index) in object">{{index}}=>{{valueName}}:{{value}}</li>
+		</ul>
+		<!-- 条件渲染 -->
+		<div v-if="Math.random()<0.5">
+			Now you see me!
+		</div>
+		<div v-else>
+			Now you dont!
+		</div>
+		<!--class与style的绑定-->
+		<!--active是否存在取决于数据属性的isActive值为true还是false;text-danger也一样-->
+		<!--class绑定对象-->
+		<div id='test-class' class='static' v-bind:class="{active:isActive,'text-danger':hasError}">
+			测试class与style的绑定
+		</div>
+		<!--class绑定一个返回对象的计算属性；这是一个常用且强大的模式-->
+		<div id='test-class-computed' v-bind:class="classObject">
+			绑定一个返回对象的计算属性
+		</div>
+		<!--class绑定数组-->
+		<div id='test-class-array' v-bind:class="[activeClass,errorClass]"></div>
+		<!--
+			1:检测class绑定数组根据条件切换列表中的class,可以使用三元表达式
+			<div v-bind:class="[isActive?activeClass:'',errorClass]"></div>
+			2:当有多个条件class时这样写有点繁琐，所以也可以使用对象语法
+			<div v-bind:class="[{active:isActive},errorClass]"></div>
+		-->
+		<!-- 绑定内联样式  同样对象语法常常结合返回对象的计算属性使用-->
+		<div id='bindStyleObj' v-bind:style="styleObject"></div>
+		<div id='bindStyleArray' v-bind:style="[baseStyle,overridingStyles]"></div>
+		<!-- 这样写只会渲染数组中最后一个被浏览器支持的值；在本例中，如果浏览器支持不带浏览器前缀的flexbox那么只会渲染display:flex -->
+		<div v-bind:style="{display:['-wekit-box','-ms-flexbox','flex']}"></div>
+				
+		<!-- 相当于View -->
+		<div id='app'>
+			<p>{{message}}</p>
+			<input type="text" v-model='message' />
+			<p>翻转之后的效果：{{reverseComputed}}</p>
+		</div>
+		<div id='demo'>
+			全名：{{fullName}}
+		</div>
+		<div id="watch-example">
+			<p>
+				Ask a yes/no question:
+				<input v-model='question'>
+			</p>
+			<p>{{answer}}</p>
+		</div>
+	</body>
+	<script src></script>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<!--代替jquery的基于Promise的可用于浏览器和node.js的HTTP请求-->
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0-0/axios.js"></script>
+	<!--代替js函数库-->
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+	<script type="text/javascript">
+		var example6=new Vue({
+			el:'#example-6',
+			data:{
+				counter:0
+			}
+		});
+		var example5=new Vue({
+			el:'#example-5',			
+		});
+		var example4=new Vue({
+			el:'#example-4',
+			data:{
+				sets:[[1,2,3,4,5],[6,7,8,9,10]]
+			},
+			methods:{
+				even:function(numbers){
+					return numbers.filter(function(number){
+						return number%2==0
+					})
+				}
+			}
+		});
+		var example3=new Vue({
+			el:'#example-3',
+			data:{
+				numbers:[1,2,3,4,5]
+			},
+			computed:{
+				evenNumbers:function(){
+					return this.numbers.filter(function(number){
+						return number%2===0
+					})
+				}
+			}
+		});
+		var example2=new Vue({
+			el:'#v-for-object',
+			data:{
+				object:{
+					title:'How to do lists in Vue',
+					author:'jane Doe',
+					publishedAt:'2016-04-10'
+				}
+			}
+		});
+		var example1=new Vue({
+			el:'#example-1',
+			data:{
+				parentMessage:'Parent',
+				items:[
+					{message:'Foo'},
+					{message:'Bar'}
+				]
+			}
+		});
+		//测试style的绑定
+		var testStyleObjModel={
+			styleObject:{
+				color:'red',
+				fontSize:'13px'
+			}
+		};
+		//测试class的绑定
+		var testClassArrayModel={
+			activeClass:'active',
+			errorClass:'text-danger'
+		};
+		var testClassArrayVm=new Vue({
+			el:'#test-class-array',
+			data:testClassArrayModel
+		});
+		var testClassComputedModel={
+			isActive:true,
+			error:null
+		};
+		var testClassComputedBind=new Vue({
+			el:'#test-class-computed',
+			data:testClassComputedModel,
+			computed:{
+				classObject:function(){
+					return {
+						active:this.isActive && !this.error,						
+					};
+				}
+			}
+		});
+		var testClassModel={
+			isActive:true,
+			hasError:false
+		};
+		var testBind=new Vue({
+			el:'#test-class',
+			data:testClassModel
+		});	
+		//相当与Model
+		var dataModel={
+			message:'helloworld!'
+		};
+		//创建一个Vue实例，即MVVM中的VM（ViewModel）；功能是实现Model与View之间的关联
+		var vm1= new Vue({
+			el:'#app',
+			data:dataModel,
+			computed:{
+				reverseComputed:function(){
+					return this.message.split('').reverse().join('');
+				}
+			},
+			methods:{
+				reverseMethod:function(){
+					return this.message.split('').reverse().join('');
+				}
+			}
+		});
+		//创建Model
+		var dataModel1={
+			firstName:'Foo',
+			lastName:'Bar',
+			fullName:'Foo Bar'
+		};
+		//创建ViewModel
+		var vm2=new Vue({
+			el:'#demo',
+			data:dataModel1,
+			watch: {
+			    firstName: function (val) {
+				  console.log(`1输出val值：${val}`);
+			      this.fullName = val + ' ' + this.lastName
+			    },
+			    lastName: function (val) {
+				  console.log(`2输出val值：${val}`);
+			      this.fullName = this.firstName + ' ' + val
+			    }
+			  }
+		});
+		var watchExampleModel={
+				question:"",
+				answer:'I cannot give you an answer until you ask a question!'
+		};
+		var watchExampleVM=new Vue({
+			el:'#watch-example',
+			data:watchExampleModel,
+			watch:{
+				question:function(newQuestion, oldQuestion){
+					console.log('进入到watch函数中'+newQuestion+'||'+oldQuestion);
+					this.answer='waiting for you to stop typing..';
+					this.debouncedGetAnswer();
+				}
+			},
+			created:function(){
+				console.log("进入到created函数中");
+				//_debounced:防抖动函数，自上次被调用后等待多少毫秒再调用
+				this.debouncedGetAnswer=_.debounce(this.getAnswer,500)
+			},
+			methods:{				
+				getAnswer:function(){
+					console.log('进入getAnswer函数')
+					if(this.question.indexOf('?')===-1){
+						this.getAnswer='Questions usually contain a question matk.;-)';
+						return;
+					}
+					this.answer='Thingking...';
+					var vm=this;
+					axios.get('https://yesno.wtf/api')
+					.then(function(response){
+						//转换字符串首字母为大写其余小写
+						vm.answer=_.capitalize(response.data.answer)
+					})
+					.catch(function(error){
+						vm.answer='Error! Could not reach the API'+error;
+					})
+				}
+			}
+		});
+	</script>	
+</html>
