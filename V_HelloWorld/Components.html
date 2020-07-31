@@ -5,7 +5,14 @@
 		<title></title>		
 	</head>
 	<body>
-		
+		<div id=components-demo>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+		</div>	
+		<div id="components-demo2">
+			<button-counter></button-counter>
+		</div>
 	</body>
 	<script src></script>
 	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -14,6 +21,42 @@
 	<!--代替js函数库-->
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 	<script type="text/javascript">
+		//动态添加进来的数据默认是非响应式的,可通过下面两种方法实现动态添加数据的响应式
+		//1：Vue.set(object,key,value)   ------>适用于添加单个属性
+		//2：Object.assign(targetObj,sourceObj,...)---->适用于添加多个属性
+		var vm=new Vue({
+			data:{
+				stu:{
+					name:'jack',
+					age:19
+				}
+			}
+		});
+		Vue.set(vm.stu,'gender','male');
+		vm.stu=Object.assign({},vm.stu,{gender:'female',height:182});
 		
+		//因为组件时可复用的Vue实例，所以他们与new vue接收相同的选项，例如data|
+		//computed|watch|methods以及生命周期钩子等；仅有的例外是像el这样根实例
+		//特有的选项
+		//全局注册
+		Vue.component('button-counter',{
+			//组件中data必须是一个函数所以每个实例可以维护一份被返回对象的独立的拷贝
+			data:function(){
+				return{
+					count:0
+				}
+			},
+			template:'<button v-on:click="count++">You clicked me {{count}} times.</button>',			
+		});
+		var componentsDemo=new Vue({
+			el:'#components-demo',
+			data:{
+				mag:'ggg'
+			}
+		});
+		var componentsDemo2=new Vue({
+			el:'#components-demo2'
+		});
+		console.log('输出vue中的数据信息：'+componentsDemo.$data.mag+' | '+componentsDemo.mag);
 	</script>	
 </html>
