@@ -1,8 +1,13 @@
+######################怎么使用##########################<br>
+拉取项目 => npm install(根据package.json文件里面写得安装包来依次安装)<br>
+=> npm run dev/serve 运行即可》<br>
+
+
 ######################vscode快捷键######################<br>
-	00=====>html模板（模板的修改：用户片段=>html.json）<br>
-	div#app=======>效果：```<div id='app'></div>```<br>
-	div.app=======>效果：```<div class='app'></div>```<br>
-	input:text====>效果：```<input type='text'>```<br>
+00=====>html模板（模板的修改：用户片段=>html.json）<br>
+div#app=======>效果：```<div id='app'></div>```<br>
+div.app=======>效果：```<div class='app'></div>```<br>
+input:text====>效果：```<input type='text'>```<br>
 
 
 
