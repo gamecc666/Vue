@@ -1,11 +1,4 @@
-#全局命令
-## npm install -g @vue/cli
-## vue create projectname
-
-
-
-# initvuepro
-
+# pro3xversion
 
 ## Project setup
 ```
