@@ -1,8 +1,8 @@
 ######################vscode快捷键######################<br>
 ##00=====>html模板（模板的修改：用户片段=>html.json）<br>
-##div#app=======>效果：```<div id='app'></div><br>```
-##div.app=======>效果：```<div class='app'></div><br>```
-##input:text====>效果：```<input type='text'><br>```
+##div#app=======>效果：```<div id='app'></div>```<br>
+##div.app=======>效果：```<div class='app'></div>```<br>
+##input:text====>效果：```<input type='text'>```<br>
 
 
 
