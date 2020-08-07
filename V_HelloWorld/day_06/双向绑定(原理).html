@@ -12,24 +12,18 @@
 
 <body>
     <div id ="app">
-        
+        <input type="text" v-model="name"> <br>
+        姓名：{{name}} <br>
+        年龄：{{age}}
     </div>
-
-    <script src='../js/vue.js'></script>
+   
     <script>
-     //创建Vue实例,得到 ViewModel
-     var vm = new Vue({
-        el: '#app',
-        data: {
-            
-        },
-        computed: {
-            
-        },
-        methods: {
-            
-        }
-     });
+    const el=document.querySelector('#app');
+    let template=el.innerHTML;
+    let _data={
+        name:'gamecc666',
+        age:12
+    }
     </script>
 </body>
 </html>
