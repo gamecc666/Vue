@@ -4,7 +4,7 @@
 
 
 ######################vscode快捷键######################<br>
-00=====>html模板（模板的修改：用户片段=>html.json）<br>
+00=====>自定义的html模板（模板的修改：用户片段=>html.json）<br>
 div#app=======>效果：```<div id='app'></div>```<br>
 div.app=======>效果：```<div class='app'></div>```<br>
 input:text====>效果：```<input type='text'>```<br>
@@ -18,4 +18,4 @@ input:text====>效果：```<input type='text'>```<br>
 3:使用ES6 Proxy+字符串的替换str.replace(x,x)实现数据的同步更新(纯js)<br>
 ----------2020/08/07---------<br>
 1:.md文件规范<br>
-2：x-mind文件的修改<br>
+2:x-mind文件的修改<br>
