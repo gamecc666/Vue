@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id ="app">
+        <div>
+            <input type="text" v-model="name">
+            <input type="text" v-model='userInfo.name'>
+            <input type="text" v-model='users[1]'>
+        </div>
+    </div>
+
+    <script src='../js/vue.js'></script>
+    <script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            name:'lee',
+            userInfo:{
+                name:'lee',
+                age:12
+            },
+            users:[
+                'lee',
+                'chen',
+                'john'
+            ]
+        },
+        computed: {
+            
+        },
+        watch: {
+            name(value,oldvalue){
+                console.log(`name从${oldvalue}改变为${value}`);
+            },
+            userInfo(value){
+                console.log(`userInfo改变为${value}`);
+            },
+            'userInfo.name':function(value){
+                console.log(`userInfo.name改变为${value}`);
+            },
+            'users.1':function(value){
+                console.log(`users1改变为${value}`);
+            },
+            users(value){
+                console.log(`users${value}`);
+            }
+        },
+        methods: {
+            
+        }
+    });
+    </script>
+</body>
+</html>
