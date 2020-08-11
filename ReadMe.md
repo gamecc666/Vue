@@ -11,9 +11,10 @@ VUE.xmind为整个vue的学习整理导图，不断完善<br>
 
 ################################vscode快捷键###################################<br>
 hh=====>自定义的html模板（模板的修改：用户片段=>html.json）<br>
-div#app=======>效果：```<div id='app'></div>```<br>
-div.app=======>效果：```<div class='app'></div>```<br>
+div#app/#app=======>效果：```<div id='app'></div>```<br>
+div.app/.app=======>效果：```<div class='app'></div>```<br>
 input:text====>效果：```<input type='text'>```<br>
+log=======>效果：```console.log();```<br>
 
 
 
@@ -30,3 +31,4 @@ input:text====>效果：```<input type='text'>```<br>
 1:6-10入门实践<br>
 ----------2020/08/11---------<br>
 1:js事件机制学习并完善思维导图<br>
+2:11-12入门实践
