@@ -33,4 +33,4 @@ log=======>效果：```console.log();```<br>
 1:js事件机制学习并完善思维导图<br>
 2:11-12入门实践<br>
 ----------2020/08/12---------<br>
-1:vue.x-mind中vue-router完善更新<br>
+1:vue.x-mind中vue-router完善更新(基本完结)<br>
