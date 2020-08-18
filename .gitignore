@@ -1,6 +1,5 @@
 .DS_Store
-/pro2xversion/pro3xversion/*
-/pro3xversion/pro3xversion/*
+node_modules/
 /dist/
 npm-debug.log*
 yarn-debug.log*
