@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 20px;
+            height: 200px;
+            background: #faa;
+            margin-bottom: 20px;
+        }
+        .box2{
+            width: 200px;
+            height: 200px;
+            background: #aaf;
+        }
+    </style>
+</head>
+
+<body>
+    <div id ="app">
+        <button v-on:click="onClick()">显示/隐藏</button>
+        <!-- 元素存在页面文档流中 -->
+        <div class="box" v-show="show"></div>
+        <!-- 元素不存在页面文档流中 -->
+        <div class=box2 v-if="show"></div>
+    </div>
+
+    <script src='../js/vue.js'></script>
+    <script>
+     //创建Vue实例,得到 ViewModel
+     var vm = new Vue({
+        el: '#app',
+        data: {
+            show:true
+        },
+        computed: {
+            
+        },
+        methods: {
+            onClick(){
+                this.show=!this.show
+            }
+        }
+     });
+    </script>
+</body>
+</html>

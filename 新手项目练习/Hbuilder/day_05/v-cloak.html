@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id ="app">
+        <div v-cloak>
+            {{a}}+{{b}}
+        </div>
+    </div>
+
+    <script src='../js/vue.js'></script>
+    <script>
+        // 延时3秒实例化vue若不加v-cloak指令，在页面上会显示{{a}}+{{b}};可用于防闪烁
+        setTimeout(()=>{
+            //创建Vue实例,得到 ViewModel
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    a:10,
+                    b:20
+                },
+                computed: {
+                    
+                },
+                methods: {
+                    
+                }
+            });
+        },3000);     
+    </script>
+</body>
+</html>

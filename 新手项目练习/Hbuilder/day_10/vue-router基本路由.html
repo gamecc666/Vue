@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .nav{
+            color: #faa;
+        }
+        .router-link-active{
+            color:blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id ="app">
+        跳转按钮，通过path跳转 <br>
+        <router-link class='nav' to='/index'>index</router-link>        
+        <router-link class='nav' to='/news'>news</router-link>
+        <router-link class='nav' to='/user'>user</router-link> <br>
+        跳转按钮，通过name跳转 <br>
+        <router-link class='nav' :to='{name:"index"}'>index</router-link>
+        <router-link class='nav' :to='{name:"news"}'>news</router-link>
+        <router-link class='nav' :to='{name:"user"}'>user</router-link> <br>
+        下面是页面的内容 <br>
+        <!-- 路由的内容显示在router-view中 -->
+        <router-view></router-view>
+    </div>
+
+    <script src='../js/vue.js'></script>
+    <!-- 必须在vue引入之后 -->
+    <script src="../js/vue-router.js"></script>
+    <script>
+    // 必须在实例里前面
+    const router=new VueRouter({
+        routes:[
+            {
+                path: '/index', // 路由的路径
+                name: 'index',  // 路由名称，可选属性，定义后可以用其实现跳转
+                component: { // 路由显示的组件
+                    template: '<div>index</div>'  // 组件模板
+                }
+            },           
+            {
+                path: '/news',
+                name: 'news',
+                component: {
+                    template: '<div>news</div>'
+                }
+            },
+            {
+                path: '/user',
+                name: 'user',
+                component: {
+                    template: '<div>user</div>'
+                }
+            },
+        ]
+    });
+    var vm = new Vue({
+        el: '#app',        
+        data: {
+            
+        },
+        computed: {
+            
+        },
+        watch: {
+            
+        },
+        methods: {
+            
+        },
+        router,
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id ="app">
+        {{num}}
+        <button v-on:click="onClick(1)">+1</button>
+    </div>
+
+    <script src='../js/vue.js'></script>
+    <script>
+     //创建Vue实例,得到 ViewModel
+     var vm = new Vue({
+        el: '#app',
+        data: {
+            num:1
+        },
+        computed: {
+            
+        },
+        methods: {
+            onClick(add)
+            {
+                this.num=this.num+add
+            }
+        }
+     });
+    </script>
+</body>
+</html>

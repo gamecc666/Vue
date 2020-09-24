@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>		
+	</head>
+	<body>
+		<div id="app">
+		    <h1 @click="updateCount" id="title">{{ count }}</h1> 			
+		  </div>
+	</body>
+	<script src></script>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<!--代替jquery的基于Promise的可用于浏览器和node.js的HTTP请求-->
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0-0/axios.js"></script>
+	<!--代替js函数库-->
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+	<script type="text/javascript">
+		const vm = new Vue({
+		      el: '#app',
+		      data: {
+		        count: 1
+		      },
+		
+		      methods: {		        
+		        updateCount: function () {
+		          for (var i = 0; i < 1000; i++) {
+		            this.count += 1 
+		          }
+		          console.log(this.count) 
+		          console.log('当前H1中的内容:', document.getElementById('title').innerText)
+		          var that = this
+				          
+		          this.$nextTick(function () {
+		            console.log('更新后: ', that.count)
+		            console.log('更新后 H1中的内容:', document.getElementById('title').innerText)
+					}
+				) } ,
+				} ,
+				})
+	</script>	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

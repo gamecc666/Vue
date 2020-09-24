@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>		
+	</head>
+	<body>
+		<!-- 表单输入绑定 -->
+			<div id="example-10">
+				<!-- 文本 -->
+				<input v-model="message" placeholder="edit me">
+				<p>Message is {{message}}</p>
+				<!-- 多行文本 
+					white-space:处理空白字符；pre-line:合并空白符序列保留换行符
+				-->
+				<span>Multiline message is:</span>
+				<p style="white-space:pre-line;">{{message}}</p>
+				<br>
+				<textarea v-model="message" placeholder="add multiple lines"></textarea>
+				<!-- 复选框 -->
+				<input type="checkbox"  id="checkbox" v-model="checked"/>
+				<label for="checkbox">{{checked}}</label>
+				
+				<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+				<label for="jack">Jack</label>
+				<input type="checkbox"  id="john" value="John" v-model="checkedNames"/>
+				<label for="john">John</label>
+				<input type="checkbox" id="mike" value="Mike" v-model="checkedNames"/>
+				<label for="mike">Mike</label>
+				<br>
+				<span>Checked names:{{checkedNames}}</span>
+				<!-- 单选按钮 -->
+				<br>
+				<input type="radio" id="one" value="One" v-model="picked"/>
+				<label for="one">One</label>
+				<br>
+				<input type="radio" id="two" value="Two" v-model="picked"/>
+				<label for="two">Two</label>
+				<br>
+				<span>Picked:{{picked}}</span>
+				<br>
+				<!-- 选择框 -->
+				<!-- 单选时 -->
+				<select v-model="selected">
+					<option disabled value="">请选择</option>
+					<option >A</option>
+					<option >B</option>
+					<option >C</option>
+				</select>
+				<span>Selected:{{selected}}</span>
+				<br>
+				<!-- 多选时 -->
+				<select v-model="selectedMore" multiple style="width:50px;">
+					<option>A</option>
+					<option>B</option>
+					<option>C</option>
+				</select>
+				<br>
+				<span>SelectedMore:{{selectedMore}}</span>
+				<br>
+				<!-- 用v-for渲染的动态选项 -->
+				<select v-model="selectedDynamicMore">
+					<option v-for="option in options" v-bind:value="option.value">
+						{{option.text}}
+					</option>
+				</select>
+				<span>Selected:{{selectedDynamicMore}}</span>
+				<br>
+				<!-- 值绑定 
+				对于单选按钮、复选框、选择框的选项，v-model绑定的值通常是静态字符串（对于
+				复选框也可以是布尔值）
+				-->
+					<!-- 当选中时，`picked` 为字符串 "a"
+					<input type="radio" v-model="picked" value="a"> -->
+					
+					<!-- `toggle` 为 true 或 false -->
+					<!-- <input type="checkbox" v-model="toggle"> -->
+					
+					<!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+					<!-- <select v-model="selected">
+					  <option value="abc">ABC</option>
+					</select>
+					<br> -->
+					<!-- 复选框 -->
+					<input type="checkbox" v-model="toggle" true-value='yes' false-value='no'>
+					<!-- 单选框 -->
+					<input type="radio" v-model="pick" v-bind:value="a">
+					<!-- 选择框选项 -->
+					<select v-model="selected">
+					    <!-- 内联对象字面量 -->
+					  <option v-bind:value="{ number: 123 }">123</option>
+					</select>
+					<br>
+					<!-- 修饰符 -->
+						<!-- .lazy 在默认情况下，v-model 在每次 input 事件触发后将输入框的值与数据进行同步 (除了上述输入法组合文字时)。
+						你可以添加 lazy 修饰符，从而转为在 change 事件_之后_进行同步：-->
+						<input v-model.lazy="msg">
+						<!-- .number 将用户的输入值转为数值类型 -->
+						<input type="number" v-model.number="age">
+						<!-- .trim 自动过滤掉用户输入的首位空白字符 -->
+						<input v-model.trim="msg" />
+			</div>
+			
+			
+			
+			
+		<!-- 事件监听 -->
+			<!-- 后面跟随JS代码 -->
+			<div id="example-6">
+				<button v-on:click="counter+=1">Add 1</button>
+				<p>The button above has been clicked {{counter}} times.</p>
+			</div>
+			<!-- 后面跟随方法名称 -->
+			<div id="example-7">
+				<button v-on:click="greet">Greet</button>
+			</div>
+			<!-- 在内联JS语句中调用方法 -->
+			<div id="example-8">
+				<button v-on:click="say('hi')">Say hi</button>
+				<button v-on:click="say('what')">Say what</button>
+			</div>
+			<!-- vue.js为v-on提供的事件修饰符,以.开始 -->
+				<!-- 阻止单击事件继续传播 -->
+				<a v-on:click.stop='doThis'></a>
+				<!-- 提交事件不重载界面 -->
+				<form v-on:submit.prevent='onSubmit'></form>
+				<!-- 修饰符可以串联 -->
+				<a v-on:click.stop.prevent="doThat"></a>
+				<!-- 只有修饰符 -->
+				<form v-on:submit.prevent></form>
+				<!-- 添加事件监听器时使用事件捕获模式
+				即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+				<div v-on:click.capture="doThis"></div>
+				<!-- 只有在event.target是当前元素自身时触发处理函数
+				即事件不是从内部元素触发的 -->
+				<div v-on:click.self='doThat'>...</div>
+				<!-- 点击事件只处理一次 -->
+				<a v-on:click.once="doThis"></a>
+				<!-- 滚动事件的默认行为（即滚动行为）将会立即触发
+				而不会等待‘onScoll’完成
+				这其中包含'event.preventDefault()'的情况 
+				.passive不能和.prevent一起使用，因为.prevent会被忽略
+				.passive会告诉浏览器你不想阻止事件的默认行为-->
+				<div v-on:scroll.passive='onScroll'>...</div>
+			<!-- Vue.js提供的按键修饰符；不止下面这些-->
+				<!-- 只有‘key’是‘Enter’时调用‘vm.submit()’ -->
+				<input v-on:keyup.enter="submit">
+				<!-- 只有点击PageDown时才被调用 -->
+				<input v-on:keyup.page-down="onPageDown">
+			<!-- 按键码 keyCode用法已被废弃并可能不会被新的浏览器支持；
+			 使用keyCode也是允许的；vue提供了绝大多数常用的按键码的别名
+			 .enter|.tab|.delete|.esc|.space|.up|.down|.left|.right-->			
+				<input v-on:keyup.13="summit">
+			 <!-- 自定义按键修饰符别名；下面可以再代码中使用v-on:keyup.f1-->
+				Vue.config.keyCodes.f1=112
+			 <!-- 系统修饰符 
+			 可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器
+			 .ctrl|.alt|.shift|.meta-->
+				<!-- Alt+C -->
+				<input v-on:keyup.alt.67="clear">
+				<!-- Ctrl+Click -->
+				<div v-on:click.ctrl="Do something">Do Something</div>
+			 <!-- .exact修饰符(简称精准系统修饰符) ，允许你控制由精确的系统修饰符组合触发的事件-->
+				<!-- 即使Alt或Shift被一同按下时也会触发 -->	
+				<button v-on:click.ctrl="onClick">A</button>
+				<!-- 有且只有Ctrl被按下时才会触发 -->
+				<button v-on:click.ctrl.exact="onCtrlClick">A</button>
+				<!-- 没有任何系统修饰符被按下的时候触发 -->
+				<button v-on:click.exact="onClick">A</button>
+			 
+			 <!-- 鼠标按钮修饰符 
+			 .left|.right|.middle-->
+				
+			
+			
+		<!-- 在内联JS语句中访问原始的DOM事件（使用特殊变量$event） -->
+		<div id="example-9">
+			<button v-on:click="warn('form cannot be submited yet',$event)">
+				Submit
+			</button>
+		</div>
+		
+		<!-- 列表渲染 -->
+		<!-- 使用数组 -->
+		<ul id="example-1">
+			<li v-for="(item,index) in items" v-bind:key="item.message">
+				{{parentMessage}}--{{index}}--{{item.message}}
+			</li>			
+		</ul>
+		<ul id='example-3'>
+			<li  v-for="n in evenNumbers">{{n}}</li>
+		</ul>
+		<div id='example-4'>
+			<ul v-for="set in sets">
+				<li v-for="n in even(set)">{{n}}</li>
+			</ul>
+		</div>
+		<div id='example-5'>
+			<span v-for="n in 10">{{n}}</span>
+		</div>
+		
+		<!-- 使用对象 -->
+		<ul id="v-for-object" class="demo">
+			<li v-for="(value,valueName,index) in object">{{index}}=>{{valueName}}:{{value}}</li>
+		</ul>
+		<!-- 条件渲染 -->
+		<div v-if="Math.random()<0.5">
+			Now you see me!
+		</div>
+		<div v-else>
+			Now you dont!
+		</div>
+		<!--class与style的绑定-->
+		<!--active是否存在取决于数据属性的isActive值为true还是false;text-danger也一样-->
+		<!--class绑定对象-->
+		<div id='test-class' class='static' v-bind:class="{active:isActive,'text-danger':hasError}">
+			测试class与style的绑定
+		</div>
+		<!--class绑定一个返回对象的计算属性；这是一个常用且强大的模式-->
+		<div id='test-class-computed' v-bind:class="classObject">
+			绑定一个返回对象的计算属性
+		</div>
+		<!--class绑定数组-->
+		<div id='test-class-array' v-bind:class="[activeClass,errorClass]"></div>
+		<!--
+			1:检测class绑定数组根据条件切换列表中的class,可以使用三元表达式
+			<div v-bind:class="[isActive?activeClass:'',errorClass]"></div>
+			2:当有多个条件class时这样写有点繁琐，所以也可以使用对象语法
+			<div v-bind:class="[{active:isActive},errorClass]"></div>
+		-->
+		<!-- 绑定内联样式  同样对象语法常常结合返回对象的计算属性使用-->
+		<div id='bindStyleObj' v-bind:style="styleObject"></div>
+		<div id='bindStyleArray' v-bind:style="[baseStyle,overridingStyles]"></div>
+		<!-- 这样写只会渲染数组中最后一个被浏览器支持的值；在本例中，如果浏览器支持不带浏览器前缀的flexbox那么只会渲染display:flex -->
+		<div v-bind:style="{display:['-wekit-box','-ms-flexbox','flex']}"></div>
+				
+		<!-- 相当于View -->
+		<div id='app'>
+			<p>{{message}}</p>
+			<input type="text" v-model='message' />
+			<p>翻转之后的效果：{{reverseComputed}}</p>
+		</div>
+		<div id='demo'>
+			全名：{{fullName}}
+		</div>
+		<div id="watch-example">
+			<p>
+				Ask a yes/no question:
+				<input v-model='question'>
+			</p>
+			<p>{{answer}}</p>
+		</div>
+	</body>
+	<script src></script>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<!--代替jquery的基于Promise的可用于浏览器和node.js的HTTP请求-->
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0-0/axios.js"></script>
+	<!--代替js函数库-->
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+	<script type="text/javascript">
+		var example10=new Vue({
+			el:'#example-10',
+			data:{
+				checked:"true",
+				message:'',
+				checkedNames:[],
+				picked:'',
+				selected:'',
+				selectedMore:[],
+				selectedDynamicMore:'A',
+				options:[
+					{text:'One',value:'A'},
+					{text:'Two',value:'B'},
+					{text:'Three',value:'C'}
+				],
+				toggle:'',
+				msg:'this is  gamecc666!!!   '
+			}
+			
+		});
+		
+		var example9=new Vue({
+			el:'#example-9',
+			methods:{
+				warn:function(message,event){
+					if(event){
+						console.log(event);
+						event.preventDefault();
+					}
+					alert(message);
+				}
+			}
+		});
+		var example8=new Vue({
+			el:'#example-8',
+			methods:{
+				say:function(message){
+					alert(message);
+				}
+			}
+		});
+		var example7=new Vue({
+			el:'#example-7',
+			data:{
+				name:'Vue.js'
+			},
+			methods:{
+				greet:function(event){
+					alert('Hello'+this.name+'!');
+					if(event){
+						console.log(event);
+						alert(event.target.tagName)
+					}
+				}
+			}
+		});
+		var example6=new Vue({
+			el:'#example-6',
+			data:{
+				counter:0
+			}
+		});
+		var example5=new Vue({
+			el:'#example-5',			
+		});
+		var example4=new Vue({
+			el:'#example-4',
+			data:{
+				sets:[[1,2,3,4,5],[6,7,8,9,10]]
+			},
+			methods:{
+				even:function(numbers){
+					return numbers.filter(function(number){
+						return number%2==0
+					})
+				}
+			}
+		});
+		var example3=new Vue({
+			el:'#example-3',
+			data:{
+				numbers:[1,2,3,4,5]
+			},
+			computed:{
+				evenNumbers:function(){
+					return this.numbers.filter(function(number){
+						return number%2===0
+					})
+				}
+			}
+		});
+		var example2=new Vue({
+			el:'#v-for-object',
+			data:{
+				object:{
+					title:'How to do lists in Vue',
+					author:'jane Doe',
+					publishedAt:'2016-04-10'
+				}
+			}
+		});
+		var example1=new Vue({
+			el:'#example-1',
+			data:{
+				parentMessage:'Parent',
+				items:[
+					{message:'Foo'},
+					{message:'Bar'}
+				]
+			}
+		});
+		//测试style的绑定
+		var testStyleObjModel={
+			styleObject:{
+				color:'red',
+				fontSize:'13px'
+			}
+		};
+		//测试class的绑定
+		var testClassArrayModel={
+			activeClass:'active',
+			errorClass:'text-danger'
+		};
+		var testClassArrayVm=new Vue({
+			el:'#test-class-array',
+			data:testClassArrayModel
+		});
+		var testClassComputedModel={
+			isActive:true,
+			error:null
+		};
+		var testClassComputedBind=new Vue({
+			el:'#test-class-computed',
+			data:testClassComputedModel,
+			computed:{
+				classObject:function(){
+					return {
+						active:this.isActive && !this.error,						
+					};
+				}
+			}
+		});
+		var testClassModel={
+			isActive:true,
+			hasError:false
+		};
+		var testBind=new Vue({
+			el:'#test-class',
+			data:testClassModel
+		});	
+		//相当与Model
+		var dataModel={
+			message:'helloworld!'
+		};
+		//创建一个Vue实例，即MVVM中的VM（ViewModel）；功能是实现Model与View之间的关联
+		var vm1= new Vue({
+			el:'#app',
+			data:dataModel,
+			computed:{
+				reverseComputed:function(){
+					return this.message.split('').reverse().join('');
+				}
+			},
+			methods:{
+				reverseMethod:function(){
+					return this.message.split('').reverse().join('');
+				}
+			}
+		});
+		//创建Model
+		var dataModel1={
+			firstName:'Foo',
+			lastName:'Bar',
+			fullName:'Foo Bar'
+		};
+		//创建ViewModel
+		var vm2=new Vue({
+			el:'#demo',
+			data:dataModel1,
+			watch: {
+			    firstName: function (val) {
+				  console.log(`1输出val值：${val}`);
+			      this.fullName = val + ' ' + this.lastName
+			    },
+			    lastName: function (val) {
+				  console.log(`2输出val值：${val}`);
+			      this.fullName = this.firstName + ' ' + val
+			    }
+			  }
+		});
+		var watchExampleModel={
+				question:"",
+				answer:'I cannot give you an answer until you ask a question!'
+		};
+		var watchExampleVM=new Vue({
+			el:'#watch-example',
+			data:watchExampleModel,
+			watch:{
+				question:function(newQuestion, oldQuestion){
+					console.log('进入到watch函数中'+newQuestion+'||'+oldQuestion);
+					this.answer='waiting for you to stop typing..';
+					this.debouncedGetAnswer();
+				}
+			},
+			created:function(){
+				console.log("进入到created函数中");
+				//_debounced:防抖动函数，自上次被调用后等待多少毫秒再调用
+				this.debouncedGetAnswer=_.debounce(this.getAnswer,500)
+			},
+			methods:{				
+				getAnswer:function(){
+					console.log('进入getAnswer函数')
+					if(this.question.indexOf('?')===-1){
+						this.getAnswer='Questions usually contain a question matk.;-)';
+						return;
+					}
+					this.answer='Thingking...';
+					var vm=this;
+					axios.get('https://yesno.wtf/api')
+					.then(function(response){
+						//转换字符串首字母为大写其余小写
+						vm.answer=_.capitalize(response.data.answer)
+					})
+					.catch(function(error){
+						vm.answer='Error! Could not reach the API'+error;
+					})
+				}
+			}
+		});
+	</script>	
+</html>
