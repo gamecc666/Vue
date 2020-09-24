@@ -1,5 +1,8 @@
 <template>
-  <div class="hello">
+  <div id="co">
+    <p>{{message | captitalize}}</p>
+  </div>
+  <!-- <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -80,7 +83,7 @@
         </a>
       </li>
     </ul>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -88,7 +91,14 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      message: 'gamecc666 测试过滤器！！！'
+    }
+  },
+  filters:{
+    captitalize:function(value){
+      if(!value) return '';
+      value=value.toString();
+      return value.charAt(0).toUpperCase()+value.slice(1);
     }
   }
 }
