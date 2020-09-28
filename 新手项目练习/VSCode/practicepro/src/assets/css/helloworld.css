@@ -1,0 +1,44 @@
+#pack{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#demo1{
+  background-color: cyan;
+  text-align: left;
+  height: 100%;
+  width: 25%;
+}
+#demo2{
+  background-color: hotpink;
+   width: 25%;
+}
+#demo3{
+  background-color: lawngreen;
+   width: 25%;
+}
+#demo4{
+  background-color: orange;
+   width: 25%;
+}
+#setp{
+  background-color: bisque;
+  display: inline;
+}
+#co{
+  text-align: left;
+}
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
