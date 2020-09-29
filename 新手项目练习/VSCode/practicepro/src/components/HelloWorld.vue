@@ -138,9 +138,12 @@
 </template>
 
 <script>
-// 防抖、节流
-let timer,ttimer,lasttime;
-let nowtime = +new Date();
+// 防抖
+let timer;
+// 节流（定时器，上次点击时间，当前点击时间）
+let ttimer,lasttime;
+let now= +new Date();
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -170,14 +173,14 @@ export default {
     value2:{
       handler:function(val,oldval){
         if(timer){
-          clearTimeout(timer);
+          clearTimeout(timer); //只是删除了timer指向的定时器
         }
         timer=setTimeout(()=>{
           console.log('-----------------防抖---------------');
           if(val!==oldval){
             console.log(`新值是${val},老值是${oldval}`);
           }
-          timer=undefined;
+          timer=undefined; //重新指向定时器
         },2000);
       }
     }
@@ -190,20 +193,28 @@ export default {
     }
   },
   methods:{
+    // 节流（在2秒内多次点击，只有一次生效）
     throttle:function(event){
-      console.log('----节流----');
-      if(lasttime && nowtime-lasttime<200){
-        clearTimeout(ttimer);
-        ttimer=setTimeout(() => {
-          lasttime=+new Date();
-          console.log(`--1--nowtime:${nowtime}||lasttime:${lasttime}||span:${nowtime-lasttime}`);
-        }, 2000);
-      }else{
-        // lasttime=nowtime;
-        ttimer=setTimeout(() => {
-          lasttime=+new Date();
-          console.log(`--2--nowtime:${nowtime}||lasttime:${lasttime}`);
-        }, 200);
+      if(lasttime){
+        if(lasttime - now <2000)
+        {
+          lasttime= +new Date();
+        }
+        else{
+          now= +new Date();
+          ttimer=setTimeout(()=>{
+            console.log('--点击2');
+            lasttime= +new Date();
+          },2000);
+        }
+        //clearTimeout(ttimer);
+      }
+      else{
+        lasttime= +new Date();
+        ttimer=setTimeout(()=>{
+          console.log('--点击2');
+          lasttime= +new Date();
+        },2000);
       }
     },
     pSetClick:function(){
