@@ -42,8 +42,14 @@
         </table>
         <button @click="throttle">节流</button>
       </div>
+      <!-- tab选项卡 -->
       <div id="demo2">
-
+        <div id="demo2_buts">
+          <button class="demo2_btn" @click="toggle(index,tab.view)" v-for="(tab,index) in tabs" :key="tab.id">{{tab.name}}</button>
+        </div>
+        <div id="demo2_content">
+          <component :is="currentview"></component>
+        </div>
       </div>
       <div id="demo3">
 
@@ -138,6 +144,18 @@
 </template>
 
 <script>
+var tab1={
+  template:'<div>显示tab1选项卡</div>'
+};
+var tab2={
+  template:'<div>显示tab2选项卡</div>'
+};
+var tab3={
+  template:'<div>显示tab3选项卡</div>'
+};
+var tab4={
+  template:'<div>显示tab4选项卡</div>'
+};
 // 防抖
 let timer;
 // 节流（定时器，上次点击时间，当前点击时间）
@@ -154,8 +172,30 @@ export default {
       trimvalue:'',
       numbervalue:34,
       lazyvalue:'',
-      message: 'gamecc666 测试过滤器！！！'
+      message: 'gamecc666 测试过滤器！！！',
+      currentview:'tab1',
+      tabs:[
+        {
+          name:'btn_tab1',
+          view:'tab1'
+        },
+        {
+          name:'btn_tab2',
+          view:'tab2'
+        },
+        {
+          name:'btn_tab3',
+          view:'tab3'
+        },
+        {
+          name:'btn_tab4',
+          view:'tab4'
+        }
+      ]
     }
+  },
+  components:{
+    tab1,tab2,tab3,tab4
   },
   computed:{
     sum:function(){
@@ -193,6 +233,10 @@ export default {
     }
   },
   methods:{
+    // tab选项卡
+    toggle(index,view){
+      this.currentview=view
+    },
     // 节流（在2秒内多次点击，只有一次生效）
     throttle:function(event){
       if(lasttime){
