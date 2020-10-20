@@ -48,11 +48,65 @@
           <button class="demo2_btn" @click="toggle(index,tab.view)" v-for="(tab,index) in tabs" :key="tab.id">{{tab.name}}</button>
         </div>
         <div id="demo2_content">
+          <!-- component 标签Vue框架自定义的标签，它的用途就是可以动态绑定我们的组件，根据数据的不同更换不同的组件。 -->
           <component :is="currentview"></component>
         </div>
       </div>
+      <!-- element-ui -->
       <div id="demo3">
-
+        <!-- 按钮 -->
+        <el-row>
+          <el-button size="mini">默认按钮</el-button>
+          <el-button size="mini" type="primary">主要按钮</el-button>
+          <el-button size="mini" type="success">成功按钮</el-button>
+          <el-button size="mini" type="info">信息按钮</el-button>
+          <el-button size="mini" type="warning">警告按钮</el-button>
+          <el-button size="mini" type="danger">危险按钮</el-button>
+        </el-row>
+        <el-row>
+          <el-button size="mini" plain>朴素按钮</el-button>
+          <el-button size="mini" type="primary" plain>主要按钮</el-button>
+          <el-button size="mini" type="success" plain>成功按钮</el-button>
+          <el-button size="mini" type="info" plain>信息按钮</el-button>
+          <el-button size="mini" type="warning" plain>警告按钮</el-button>
+          <el-button size="mini" type="danger" plain>危险按钮</el-button>
+        </el-row>
+        <el-row>
+          <el-button size="mini" round>朴素按钮</el-button>
+          <el-button size="mini" type="primary" round>主要按钮</el-button>
+          <el-button size="mini" type="success" round>成功按钮</el-button>
+          <el-button size="mini" type="info" round>信息按钮</el-button>
+          <el-button size="mini" type="warning" round>警告按钮</el-button>
+          <el-button size="mini" type="danger" round>危险按钮</el-button>
+        </el-row>
+        <el-row>
+          <el-button size="mini" icon="el-icon-search" circle></el-button>
+          <el-button size="mini" type="primary" icon="el-icon-check" circle></el-button>
+          <el-button size="mini" type="success" icon="el-icon-message" circle></el-button>
+          <el-button size="mini" type="info" icon="el-icon-edit" circle></el-button>
+          <el-button size="mini" type="warning" icon="el-icon-star-off" circle></el-button>
+          <el-button size="mini" type="danger" icon="el-icon-delete" circle></el-button>
+        </el-row>
+        <!-- 布局 -->
+        <el-row>
+          <el-col :span="24">
+            <div class="grid-content bg-purple-dark"></div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <div class="grid-content bg-purple"></div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple-light"></div>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+        </el-row>
       </div>
       <div id="demo4">
 
