@@ -109,6 +109,38 @@
         </el-row>
       </div>
       <div id="demo4">
+        <!--重要理解含义
+          布局容器 ：<el-container>：外层容器。当子元素中包含 <el-header> 或 <el-footer> 时，
+          全部子元素会垂直上下排列，否则会水平左右排列。
+        -->
+        <el-container>
+          <!-- 布局一：Head+Main+Footer -->
+          <!-- <el-header>Header</el-header>
+          <el-main>Main</el-main>
+          <el-footer>footer</el-footer> -->
+          <!-- 布局二：侧边栏+Head+Main+Footer -->
+          <!-- <el-header>head</el-header>
+          <el-container>
+            <el-aside width="80px">aside</el-aside>
+            <el-main>main</el-main>
+          </el-container>
+          <el-footer>foot</el-footer> -->
+          <!-- 布局三：Head+Aside+Main -->
+          <el-header>Head</el-header>
+          <el-container>
+            <el-aside width="80px">Aside</el-aside>
+            <el-main>
+              <el-link href="www.baidu.com" target="_blank" disabled>默认链接</el-link>
+              <el-link type="primary">主要链接</el-link>
+              <el-link type="success" :underline="false">成功链接</el-link>
+              <el-link type="warning">警告链接</el-link>
+              <el-link type="danger" disabled>危险链接</el-link>
+              <el-link type="info">信息链接</el-link>
+              <el-link :underline="false" icon="el-icon-edit">编辑</el-link>
+              <el-link :underline="false">查看<i class="el-icon-view el-icon--right"></i></el-link>
+            </el-main>
+          </el-container>
+        </el-container>
 
       </div>
     </div>
