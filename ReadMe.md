@@ -9,12 +9,14 @@ VUE.xmind为整个vue的学习整理导图，不断完善<br>
 => npm run dev/serve 运行即可<br>
 
 
-################################vscode快捷键###################################<br>
+#########################vscode快捷键(前期禁止使用快捷键)############################<br>
+
 hh=====>自定义的html模板（模板的修改：用户片段=>html.json）<br>
 div#app/#app=======>效果：```<div id='app'></div>```<br>
 div.app/.app=======>效果：```<div class='app'></div>```<br>
 input:text====>效果：```<input type='text'>```<br>
 log=======>效果：```console.log();```<br>
+default=========>效果：```<template> </template> <script> export default {}</script> <style></style>```<br>
 
 
 
@@ -45,3 +47,7 @@ log=======>效果：```console.log();```<br>
 2:完成17，18实践<br>
 ----------2020/08/20---------<br>
 1:完善对vue.xmind的学习<br>
+----------2020/10/20---------<br>
+1:引入element-ui<br>
+----------2020/10/27---------<br>
+1:动态组件通信<br>
