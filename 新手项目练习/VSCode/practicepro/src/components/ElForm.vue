@@ -21,9 +21,10 @@
           </el-col>
           <el-col :span="12">
             <el-checkbox :indeterminate='isIndeterminate' v-model="checkAll" @change="handleChackboxAll" >全选</el-checkbox>
-
           </el-col>
         </el-row>
+        <!-- 点击表中的一个文字触发一个弹窗 -->
+
       </el-main>
     </el-container>
     <el-footer>底操作栏</el-footer>
