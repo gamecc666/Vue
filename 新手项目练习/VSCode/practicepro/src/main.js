@@ -8,7 +8,8 @@ import {
   Container,Header,Aside,Main,Footer,
   Link,
   Radio,RadioGroup,RadioButton,
-  Checkbox,CheckboxButton,CheckboxGroup
+  Checkbox,CheckboxButton,CheckboxGroup,
+  Popover,
 } from 'element-ui';
 Vue.use(Button);
 Vue.use(Row);
@@ -25,6 +26,7 @@ Vue.use(RadioButton);
 Vue.use(Checkbox);
 Vue.use(CheckboxButton);
 Vue.use(CheckboxButton);
+Vue.use(Popover);
 Vue.config.productionTip = false;
 
 
