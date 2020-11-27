@@ -22,18 +22,20 @@
         </el-row>
 
         <div class="popContain">
-          <el-button size="mini" @click="popEvent" plain type="primary">点击出现弹框</el-button>
-          <div :class="[isOrNotShowPop? 'showPop':'hidePop']">
-            <p>这是测试浮定飘窗的功能</p>
+          <div class="one">
+            <el-button size="mini" @click="popEvent" plain type="primary">弹框1</el-button>
+            <Pop @cTransf="cTranfEvent" :closeOrOpen="isOrNotShowPop" fPop="isOrNotShowPop"></Pop>
+          </div>
+          <div class="two">
+            <el-button type="primary" @click="pop2Event" size="mini" plain >弹框2</el-button>
+            <Pop  @cTransf="cTranfEvent" :closeOrOpen="isOrNotShowPop2" fPop="isOrNotShowPop2"></Pop>
           </div>
         </div>
 
         <div class="classStyle">
           <p>测试vue中 Class 与 Style的绑定</p>
           <el-button type="primary" size="mini" @click="changeEvent" plain>变色</el-button>
-          <div :class="['bgContain',changeBGColor?'blackBG':'greenBG']">
-
-          </div>
+          <div :class="['bgContain',changeBGColor?'blackBG':'greenBG']"></div>
         </div>
       </el-main>
     </el-container>
@@ -41,17 +43,29 @@
   </el-container>
 </template>
 <script>
+import CustomePopover from '@/components/CustomePopover'
 export default {
   name:'ElForm',
+  components:{
+    Pop:CustomePopover
+  },
   data(){
     return {
       changeBGColor:false,
       isOrNotShowPop:false,
+      isOrNotShowPop2:false,
       radio:1,
       radio2:'B1'
     };
   },
   methods:{
+    cTranfEvent(data){
+      console.log(`come in cTranfEvent!!!`);
+      //console.log(data);
+      // console.log(`-----------------`);
+      // console.log(`${data[1]}`);
+      this[data[1]]=data[0];
+    },
     changeEvent(){
       console.log(`come in changeEvent!!!`);
       this.changeBGColor=!this.changeBGColor;
@@ -59,6 +73,10 @@ export default {
     popEvent(){
       console.log(`come in popEvent!!!`);
       this.isOrNotShowPop=!this.isOrNotShowPop;
+    },
+    pop2Event(){
+      console.log(`come in pop2Event!!!`);
+      this.isOrNotShowPop2=!this.isOrNotShowPop2;
     },
     getRadioValue:function(value){
       console.log(`当前选中的值${value}`);

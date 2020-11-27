@@ -1,4 +1,6 @@
-html,body,.root_buts_fileoperates_butgroup{
+html,
+body,
+.root_buts_fileoperates_butgroup{
     height: 100%;
     padding: 0;
     margin: 0;
@@ -16,11 +18,11 @@ body{
     padding-left: 5px;
     height: 100%;
     width: 250px;
-    background-color: drakgray;
+    background-color:darkgray;
 }
 .root_view{
     height: 100%;
-    width: calc(100%-250px);
+    width: calc(100% - 250px);
     font-family: simkai;
 }
 button,.root_buts_fileoperates_butgroup_button{
@@ -32,11 +34,14 @@ input[type=checkbox]{
     font-size: 10px;
     vertical-align: middle;
 }
-p,.input-lable{
+p,
+input,
+.input-lable{
     font-size: 10px;
     vertical-align: middle;
 }
-#commmetrow,#commemtcol{
+#commmetrow,
+#commemtcol{
     width: 40px;
 }
 #exportfilename{

@@ -34,7 +34,7 @@ var infiniteExtension=()=>{
     //纵向延伸
     sheet.bind(GC.Spread.Sheets.Events.TopRowChanged,function(sender,args){
         let rowcounts=sheet.getRowCount();
-        let bottomrow=sheet.getViewportBotomRow(1);
+        let bottomrow=sheet.getViewportBottomRow(1);
 
         if(bottomrow==rowcounts-1){
             if(rowcounts<10000){
@@ -67,7 +67,7 @@ var listenEvent=()=>{
     document.getElementById('hidehorizontal').addEventListener('click',function(){
         workbook.options.showHorizontalSCrollbar=!this.checked;
     });
-    document.getElementById('scrooltip').addEventListener('click',function(){
+    document.getElementById('scrolltip').addEventListener('click',function(){
         workbook.options.showScrollTip=this.checked?GC.Spread.Sheets.ShowScrollTip.both:GC.Spread.Sheets.ShowScrollTip.none;
     });
     // 主动事件
@@ -139,7 +139,7 @@ var initSheetEvet=()=>{
         {
             currentcellinfo.value=hitobj.info;
             currentcellinfo.setAttribute('data-position',JSON.stringify({x:hitobj.x,y:hitobj.y}));
-            currentcellvalue.value=activesheet.getCell(hitobj.x.hitobj.y).text();
+            currentcellvalue.value=activesheet.getCell(hitobj.x,hitobj.y).text();
         }
         else{
             currentcellvalue.value=null;
@@ -161,7 +161,7 @@ var initSheetEvet=()=>{
     document.getElementById('commentinsert').addEventListener('click',function(){
         let activesheet=workbook.getActiveSheet();
         let selectrange=activesheet.getSelections();
-        let commentinfo=document.getElementById('cmmentinfo').value;
+        let commentinfo=document.getElementById('commentinfo').value;
 
         if((selectrange.length!=0)&&(commentinfo!='')){
             for(let rangecount=0;rangecount<selectrange.length;rangecount++){
@@ -172,7 +172,7 @@ var initSheetEvet=()=>{
                         let comment=activesheet.comments.add(currow,curcol,commentinfo);
                         comment.backColor("yellow");
                         comment.foreColor("green");
-                        comment.displayModel(GC.Spread.Sheets.Comments.DisplayModel.hoverShown);
+                        comment.displayMode(GC.Spread.Sheets.Comments.DisplayMode.hoverShown);
                     }
                 }
             }
