@@ -10,6 +10,7 @@ import {
   Radio,RadioGroup,RadioButton,
   Checkbox,CheckboxButton,CheckboxGroup,
   Popover,
+  Input
 } from 'element-ui';
 Vue.use(Button);
 Vue.use(Row);
@@ -27,6 +28,7 @@ Vue.use(Checkbox);
 Vue.use(CheckboxButton);
 Vue.use(CheckboxButton);
 Vue.use(Popover);
+Vue.use(Input);
 Vue.config.productionTip = false;
 
 

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import ElForm from '@/components/Elform'
 import Com from '@/components/Com'
+import HandsonTable from '@/components/HandsonTable'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export default new Router({
       path:'/elform',
       name:'ElForm',
       component:ElForm
+    },
+    {
+      path:'/handsontable',
+      name:'HanhsonTable',
+      component:HandsonTable
     },
     {
       path: '/',
