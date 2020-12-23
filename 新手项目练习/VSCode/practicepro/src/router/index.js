@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import ElForm from '@/components/Elform'
 import Com from '@/components/Com'
-import HandsonTable from '@/components/HandsonTable'
+import SpreadJS from '@/components/SpreadJS'
 
 Vue.use(Router)
 
@@ -15,14 +15,14 @@ export default new Router({
       component:Com
     },
     {
+      path:'/spreadjs',
+      name:'SpreadJS',
+      components:SpreadJS
+    },
+    {
       path:'/elform',
       name:'ElForm',
       component:ElForm
-    },
-    {
-      path:'/handsontable',
-      name:'HanhsonTable',
-      component:HandsonTable
     },
     {
       path: '/',

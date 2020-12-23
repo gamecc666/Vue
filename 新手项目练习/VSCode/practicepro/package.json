@@ -10,7 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@handsontable/vue": "^5.1.0",
+    "@grapecity/spread-sheets-vue": "^14.0.3",
     "element-ui": "^2.13.2",
     "handsontable": "^8.2.0",
     "vue": "^2.5.2",
