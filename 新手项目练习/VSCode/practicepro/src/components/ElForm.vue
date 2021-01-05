@@ -2,25 +2,10 @@
   <el-container>
     <el-header>element-ui/Form(表单) Apply</el-header>
     <el-container>
-      <el-aside>侧边栏</el-aside>
+      <el-aside>
+        <Child01></Child01>
+      </el-aside>
       <el-main>
-        <el-row>
-          <el-col :span="6">
-            <el-radio-group v-model="radio" @change="getRadioValue(radio)">
-              <el-radio :label="1">选1</el-radio>
-              <el-radio :label="2">选2</el-radio>
-              <el-radio :label="3" disabled>选3</el-radio>
-            </el-radio-group>
-          </el-col>
-          <el-col :span="6">
-            <el-radio-group v-model="radio2" @change="getBRadioValue(radio2)">
-              <el-radio-button label="B1">B1</el-radio-button>
-              <el-radio-button label="B2">B2</el-radio-button>
-              <el-radio-button label="B3">B3</el-radio-button>
-            </el-radio-group>
-          </el-col>
-        </el-row>
-
         <div class="popContain">
           <div class="one">
             <el-button size="mini" @click="popEvent" plain type="primary">弹框1</el-button>
@@ -43,11 +28,14 @@
   </el-container>
 </template>
 <script>
-import CustomePopover from '@/components/CustomePopover'
+import CustomePopover from '@/components/CustomePopover';
+import Elform_child_01 from '@/components/Elform_child_01';
+
 export default {
   name:'ElForm',
   components:{
-    Pop:CustomePopover
+    Pop:CustomePopover,
+    Child01: Elform_child_01
   },
   data(){
     return {
@@ -61,9 +49,6 @@ export default {
   methods:{
     cTranfEvent(data){
       console.log(`come in cTranfEvent!!!`);
-      //console.log(data);
-      // console.log(`-----------------`);
-      // console.log(`${data[1]}`);
       this[data[1]]=data[0];
     },
     changeEvent(){

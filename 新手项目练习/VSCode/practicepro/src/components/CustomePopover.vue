@@ -30,7 +30,7 @@ export default {
     }
   },
   watch:{
-    closeOrOpen:function(val,oldVal){
+      closeOrOpen:function(val,oldVal){
       console.log(`come in closeOrOpen!!!`);
       this.showPop=val;
       console.log(val);
